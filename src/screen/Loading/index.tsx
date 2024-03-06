@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, ActivityIndicator, Text } from 'react-native';
-import styles from './style';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { useCustomStyles } from './style';
 
-const Loading: () => React.JSX.Element = () => {
+type Navigation = NavigationProp<ParamListBase>;
+
+const Loading = ({ navigation }: { navigation: Navigation }) => {
+  const { fontsLoaded, styles } = useCustomStyles();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.navigate('SignIn');
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!fontsLoaded) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
+
   return (
     <View style={styles.container}>
       <ActivityIndicator size="large" color="#0000ff" />
