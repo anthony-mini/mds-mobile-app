@@ -1,3 +1,3 @@
-import Logo from './logo-black.png';
+import Logo from './pokedex-logo.png';
 
 export { Logo };
