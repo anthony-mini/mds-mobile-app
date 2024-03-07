@@ -8,16 +8,24 @@ export const useCustomStyles = () => {
 
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
+      paddingTop: 30,
+      height: 100,
+      backgroundColor: '#EDEDED',
     },
     text: {
       fontSize: 20,
       fontWeight: 'bold',
-      color: 'red',
+      color: 'white',
       textAlign: 'center',
       fontFamily: fontsLoaded ? 'ClashDisplayRegular' : 'Arial',
+    },
+    image: {
+      width: 120,
+      height: 120,
+      resizeMode: 'contain',
     },
   });
 
