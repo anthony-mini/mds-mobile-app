@@ -2,7 +2,7 @@ import * as Font from 'expo-font';
 import React from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 
-export function useLoadedAssets() {
+export default function useLoadedAssets() {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
 
   // Load any resources or data that we need prior to rendering the app
