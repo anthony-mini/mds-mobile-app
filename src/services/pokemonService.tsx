@@ -1,4 +1,5 @@
-import { Evolution } from '../intrefaces/pokemonInterfaces';
+import { Evolution } from '../interfaces/pokemonInterfaces';
+import { mockGetAllPokemon, mockGetPokemonById } from '../constants';
 
 import { API_URL } from '@env';
 
@@ -9,6 +10,7 @@ export async function getAllPokemon() {
     return data;
   } catch (error) {
     console.log(error);
+    return mockGetAllPokemon;
   }
 }
 
@@ -68,5 +70,6 @@ export async function getPokemonById(id: string) {
     return data;
   } catch (error) {
     console.log(error);
+    return mockGetPokemonById[id];
   }
 }
