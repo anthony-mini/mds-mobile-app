@@ -1,16 +1,32 @@
 import React from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  Text,
+  ImageBackground,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Logo } from '../../../assets/logos';
+import { useCustomStyles } from './style';
+import { pokeBackground } from '../../../assets/images';
 
 const Header = () => {
+  const { fontsLoaded, styles } = useCustomStyles();
   const navigation = useNavigation();
 
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-      <TouchableOpacity onPress={() => navigation.navigate('Home' as never)}>
-        <Image source={Logo} style={{ width: 100, height: 100 }} />
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <Image source={pokeBackground} style={styles.imageBackground} />
+      <View style={styles.navigationContainer}>
+        {/* <Text> arrow </Text> */}
+        <TouchableOpacity onPress={() => navigation.navigate('Home' as never)}>
+          <Text style={styles.text}>
+            <Text style={styles.highlightedText}>Poke</Text>
+            dex
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
