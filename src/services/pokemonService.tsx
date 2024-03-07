@@ -16,9 +16,7 @@ export async function getAllPokemon() {
 
 export async function getAllPokemonByGeneration(gen: string) {
   try {
-    const response = await fetch(
-      `https://tyradex.vercel.app/api/v1/gen/${gen}`,
-    );
+    const response = await fetch(`${API_URL}gen/${gen}`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -28,9 +26,7 @@ export async function getAllPokemonByGeneration(gen: string) {
 
 export async function getPokemonById(id: string) {
   try {
-    const response = await fetch(
-      `https://tyradex.vercel.app/api/v1/pokemon/${id}`,
-    );
+    const response = await fetch(`${API_URL}pokemon/${id}`);
     const data = await response.json();
 
     const fetchEvolutionData = async (
@@ -38,7 +34,7 @@ export async function getPokemonById(id: string) {
       evolutionType: string,
     ) => {
       const evolutionResponse = await fetch(
-        `https://tyradex.vercel.app/api/v1/pokemon/${evolution.pokedex_id}`,
+        `${API_URL}pokemon/${evolution.pokedex_id}`,
       );
       const evolutionData = await evolutionResponse.json();
       return {
