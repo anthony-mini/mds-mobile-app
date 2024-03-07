@@ -11,7 +11,7 @@ export const useCustomStyles = () => {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: 'red',
+      backgroundColor: '#F2F7F9',
     },
     text: {
       fontSize: 20,

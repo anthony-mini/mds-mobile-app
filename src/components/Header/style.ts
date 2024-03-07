@@ -3,29 +3,59 @@ import { useFonts } from 'expo-font';
 
 export const useCustomStyles = () => {
   const [fontsLoaded] = useFonts({
-    ClashDisplayRegular: require('../../../assets/fonts/ClashDisplay-Regular.otf'),
+    ClashGroteskBold: require('../../../assets/fonts/ClashGrotesk-Bold.otf'),
+    ClashGroteskRegular: require('../../../assets/fonts/ClashGrotesk-Semibold.otf'),
   });
 
   const styles = StyleSheet.create({
     container: {
-      flexDirection: 'row',
+      position: 'relative',
       justifyContent: 'center',
       alignItems: 'center',
-      paddingTop: 30,
-      height: 100,
-      backgroundColor: '#EDEDED',
+      height: 180,
+      backgroundColor: '#F2F7F9',
+      borderBottomColor: 'rgba(160, 160, 160, 0.3)',
+      borderBottomWidth: 1,
+      shadowColor: 'rgba(160, 160, 160, 0.3)',
+      shadowOffset: {
+        width: 0,
+        height: 4,
+      },
+      shadowOpacity: 0.65,
+      shadowRadius: 3.84,
+      elevation: 10,
     },
     text: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      color: 'white',
+      fontSize: 42,
+      color: '#707070',
       textAlign: 'center',
-      fontFamily: fontsLoaded ? 'ClashDisplayRegular' : 'Arial',
+      fontFamily: fontsLoaded ? 'ClashGroteskRegular' : 'Arial',
+    },
+    highlightedText: {
+      color: '#514EB7',
+      fontFamily: fontsLoaded ? 'ClashGroteskBold' : 'Arial',
     },
     image: {
-      width: 120,
-      height: 120,
+      width: 150,
+      height: 150,
       resizeMode: 'contain',
+    },
+    imageBackground: {
+      position: 'absolute',
+      top: 20,
+      right: -50,
+      width: 150,
+      height: 150,
+      opacity: 1,
+      resizeMode: 'contain',
+    },
+    navigationContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      position: 'absolute',
+      alignItems: 'flex-start',
+      top: 70,
+      left: 20,
     },
   });
 
