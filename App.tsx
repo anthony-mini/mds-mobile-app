@@ -1,5 +1,22 @@
-import AppRoutes from './src/routes';
+import 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import { StatusBar } from 'expo-status-bar';
+
+import Navigation from './src/navigation';
+import { useLoadedAssets } from './src/hooks/useLoadedAssets';
 
 export default function App() {
-  return <AppRoutes />;
+  const isLoadingComplete = useLoadedAssets();
+
+  if (!isLoadingComplete) {
+    return null;
+  } else {
+    return (
+      <SafeAreaProvider>
+        <Navigation />
+        <StatusBar style="dark" />
+      </SafeAreaProvider>
+    );
+  }
 }

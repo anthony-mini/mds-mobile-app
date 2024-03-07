@@ -10,7 +10,7 @@ const Loading = ({ navigation }: { navigation: Navigation }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate('SignIn');
+      navigation.navigate('Home');
     }, 5000);
 
     return () => clearTimeout(timer);
