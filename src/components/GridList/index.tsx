@@ -26,6 +26,7 @@ const GridList = () => {
   const [gen, setGen] = React.useState('1');
 
   React.useEffect(() => {
+    setIsLoading(true);
     getAllPokemonByGeneration(gen).then((res) => {
       setData(res);
       setIsLoading(false);
@@ -55,8 +56,10 @@ const GridList = () => {
               ))}
             </Picker>
           </View>
-
-          {data &&
+          {isLoading ? (
+            <ActivityIndicator />
+          ) : (
+            data &&
             data.map(
               (
                 {
@@ -142,7 +145,8 @@ const GridList = () => {
                   </TouchableOpacity>
                 );
               },
-            )}
+            )
+          )}
         </ScrollView>
       )}
     </SafeAreaView>
