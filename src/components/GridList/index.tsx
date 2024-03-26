@@ -11,13 +11,11 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useCustomStyles } from './style';
-import { getAllPokemon } from '../../services/pokemonService';
+import { getAllPokemonByGeneration } from '../../services/pokemonService';
 import { Data } from '../../interfaces/pokemonInterfaces';
-import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native';
-
-// @ts-ignore
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import { Picker } from '@react-native-picker/picker';
 
 const GridList = () => {
   const { fontsLoaded, styles } = useCustomStyles();
@@ -25,9 +23,10 @@ const GridList = () => {
 
   const [data, setData] = React.useState<Data[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [gen, setGen] = React.useState('1');
 
   React.useEffect(() => {
-    getAllPokemon().then((res) => {
+    getAllPokemonByGeneration(gen).then((res) => {
       setData(res);
       setIsLoading(false);
     });
@@ -42,7 +41,20 @@ const GridList = () => {
         </View>
       ) : (
         <ScrollView contentContainerStyle={styles.container}>
-          <Text style={styles.title}>Available Pokemon</Text>
+          <View>
+            <Picker
+              selectedValue={gen}
+              onValueChange={(itemValue) => setGen(itemValue)}
+            >
+              {Array.from({ length: 9 }, (_, i) => i + 1).map((gen) => (
+                <Picker.Item
+                  key={gen}
+                  label={`Generation ${gen}`}
+                  value={gen}
+                />
+              ))}
+            </Picker>
+          </View>
 
           {data.map(
             (
