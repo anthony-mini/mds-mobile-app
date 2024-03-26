@@ -15,7 +15,6 @@ export const useCustomStyles = () => {
       fontSize: 28,
       fontWeight: '700',
       color: '#1d1d1d',
-      marginBottom: 30,
     },
     /** Card */
     card: {
@@ -100,6 +99,9 @@ export const useCustomStyles = () => {
       width: 20,
       height: 20,
       borderRadius: 10,
+    },
+    picker: {
+      marginTop: -50,
     },
   });
 
