@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Image,
@@ -46,6 +46,7 @@ const GridList = () => {
             <Picker
               selectedValue={gen}
               onValueChange={(itemValue) => setGen(itemValue)}
+              style={styles.picker}
             >
               {Array.from({ length: 9 }, (_, i) => i + 1).map((gen) => (
                 <Picker.Item

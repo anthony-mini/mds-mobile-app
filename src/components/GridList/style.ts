@@ -100,6 +100,9 @@ export const useCustomStyles = () => {
       height: 20,
       borderRadius: 10,
     },
+    picker: {
+      marginTop: -50,
+    },
   });
 
   return { fontsLoaded, styles };
