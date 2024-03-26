@@ -1,3 +1,4 @@
 import Header from './Header';
+import GridList from './GridList';
 
-export { Header };
+export { Header, GridList };

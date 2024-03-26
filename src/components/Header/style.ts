@@ -12,7 +12,7 @@ export const useCustomStyles = () => {
       position: 'relative',
       justifyContent: 'center',
       alignItems: 'center',
-      height: 180,
+      height: 100,
       backgroundColor: '#F2F7F9',
       borderBottomColor: 'rgba(160, 160, 160, 0.3)',
       borderBottomWidth: 1,
@@ -23,10 +23,12 @@ export const useCustomStyles = () => {
       },
       shadowOpacity: 0.65,
       shadowRadius: 3.84,
-      elevation: 10,
     },
     text: {
-      fontSize: 42,
+      position: 'absolute',
+      top: -20,
+      marginBottom: 20,
+      fontSize: 38,
       color: '#707070',
       textAlign: 'center',
       fontFamily: fontsLoaded ? 'ClashGroteskRegular' : 'Arial',
@@ -34,11 +36,6 @@ export const useCustomStyles = () => {
     highlightedText: {
       color: '#514EB7',
       fontFamily: fontsLoaded ? 'ClashGroteskBold' : 'Arial',
-    },
-    image: {
-      width: 150,
-      height: 150,
-      resizeMode: 'contain',
     },
     imageBackground: {
       position: 'absolute',
