@@ -5,11 +5,10 @@ import { API_URL } from '@env';
 
 export async function getAllPokemon() {
   try {
-    const response = await fetch(`${API_URL}pokemon`);
+    const response = await fetch(`${API_URL}pokemonzz`);
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
     return mockGetAllPokemon;
   }
 }
@@ -61,7 +60,6 @@ export async function getPokemonById(id: string) {
     console.log(evolutions);
 
     data.push(evolutions);
-    console.log(data);
 
     return data;
   } catch (error) {
