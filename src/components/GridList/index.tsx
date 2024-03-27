@@ -8,6 +8,7 @@ import {
   FlatList,
   ActivityIndicator,
   ScrollView,
+  Modal,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useCustomStyles } from './style';
@@ -24,6 +25,8 @@ const GridList = () => {
   const [data, setData] = React.useState<Data[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [gen, setGen] = React.useState('1');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedPokemon, setSelectedPokemon] = useState<Data | null>(null);
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -32,6 +35,11 @@ const GridList = () => {
       setIsLoading(false);
     });
   }, [gen]);
+
+  const handlePress = (pokemon: Data) => {
+    setSelectedPokemon(pokemon);
+    setModalVisible(true);
+  };
 
   return (
     <SafeAreaView>
@@ -42,6 +50,48 @@ const GridList = () => {
         </View>
       ) : (
         <ScrollView contentContainerStyle={styles.container}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Image
+                  source={{ uri: selectedPokemon?.sprites?.regular }}
+                  style={styles.modalImage}
+                />
+                <Text style={styles.modalText}>
+                  {selectedPokemon?.name?.fr} - {selectedPokemon?.pokedex_id}
+                </Text>
+                <Text style={styles.modalText}>
+                  Generation: {selectedPokemon?.generation}
+                </Text>
+                <Text style={styles.modalText}>
+                  Height: {selectedPokemon?.height}
+                </Text>
+                <Text style={styles.modalText}>
+                  Weight: {selectedPokemon?.weight}
+                </Text>
+                <Text style={styles.modalText}>
+                  Types:{' '}
+                  {selectedPokemon?.types?.map((type) => type.name).join(', ')}
+                </Text>
+                <TouchableOpacity
+                  style={styles.modalCloseButton}
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                  }}
+                >
+                  <Text style={styles.textStyle}>Close</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+
           <View>
             <Picker
               selectedValue={gen}
@@ -79,7 +129,7 @@ const GridList = () => {
                   <TouchableOpacity
                     key={index}
                     onPress={() => {
-                      // handle onPress
+                      handlePress(data[index]);
                     }}
                   >
                     <View style={styles.card}>

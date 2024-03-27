@@ -121,6 +121,49 @@ export const useCustomStyles = () => {
       fontSize: 18,
       color: '#333',
     },
+    centeredView: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 22,
+    },
+    modalView: {
+      margin: 20,
+      backgroundColor: 'white',
+      borderRadius: 20,
+      padding: 35,
+      alignItems: 'center',
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
+      width: '90%', // Ajustez la largeur selon votre design
+    },
+    modalImage: {
+      width: 100, // Ajustez selon la taille souhaitée
+      height: 100, // Ajustez selon la taille souhaitée
+      marginBottom: 15,
+    },
+    modalText: {
+      textAlign: 'center',
+      marginBottom: 15,
+    },
+    modalCloseButton: {
+      backgroundColor: '#2196F3', // Ou toute autre couleur qui s'accorde avec votre thème
+      borderRadius: 20,
+      padding: 10,
+      elevation: 2,
+      marginTop: 15,
+    },
+    textStyle: {
+      color: 'white',
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
   });
 
   return { fontsLoaded, styles };
