@@ -5,18 +5,12 @@ import {
   DefaultTheme,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { Loading, SignIn, Home } from '../screen/index';
 
-export default function Navigation() {
-  return (
-    <NavigationContainer>
-      <RootNavigator />
-    </NavigationContainer>
-  );
-}
-
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const RootNavigator = () => {
   return (
@@ -30,3 +24,27 @@ const RootNavigator = () => {
     </Stack.Navigator>
   );
 };
+
+const DrawerNavigator = () => {
+  return (
+    <Drawer.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+        drawerPosition: 'right',
+      }}
+    >
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="SignIn" component={SignIn} />
+      {/* Ajoutez ici d'autres écrans si nécessaire */}
+    </Drawer.Navigator>
+  );
+};
+
+export default function Navigation() {
+  return (
+    <NavigationContainer>
+      <DrawerNavigator />
+    </NavigationContainer>
+  );
+}

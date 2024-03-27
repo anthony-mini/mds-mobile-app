@@ -9,6 +9,7 @@ export const useCustomStyles = () => {
 
   const styles = StyleSheet.create({
     container: {
+      display: 'flex',
       position: 'relative',
       justifyContent: 'center',
       alignItems: 'center',
@@ -48,7 +49,7 @@ export const useCustomStyles = () => {
     },
     navigationContainer: {
       display: 'flex',
-      flexDirection: 'column',
+      flexDirection: 'row',
       position: 'absolute',
       alignItems: 'flex-start',
       top: 70,
