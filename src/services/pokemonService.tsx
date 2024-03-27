@@ -1,5 +1,6 @@
 import { Evolution } from '../interfaces/pokemonInterfaces';
 import { mockGetAllPokemon, mockGetPokemonById } from '../constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { API_URL } from '@env';
 
@@ -9,15 +10,22 @@ export async function getAllPokemon() {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
     return mockGetAllPokemon;
   }
 }
 
 export async function getAllPokemonByGeneration(gen: string) {
+  const cacheKey = `pokemonData-${gen}`;
   try {
+    const cachedData = await AsyncStorage.getItem(cacheKey);
+    if (cachedData !== null) {
+      return JSON.parse(cachedData);
+    }
+
     const response = await fetch(`${API_URL}gen/${gen}`);
     const data = await response.json();
+
+    await AsyncStorage.setItem(cacheKey, JSON.stringify(data));
     return data;
   } catch (error) {
     console.log(error);
@@ -61,7 +69,6 @@ export async function getPokemonById(id: string) {
     console.log(evolutions);
 
     data.push(evolutions);
-    console.log(data);
 
     return data;
   } catch (error) {
