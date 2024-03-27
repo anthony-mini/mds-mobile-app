@@ -55,13 +55,13 @@ export const useCustomStyles = () => {
       marginBottom: 12,
     },
     cardTitle: {
-      fontSize: 19,
-      fontWeight: '600',
+      fontSize: 20,
+      fontFamily: 'ClashDisplay-Semibold',
       color: '#2d2d2d',
     },
     cardPrice: {
-      fontSize: 20,
-      fontWeight: '700',
+      fontSize: 16,
+      fontFamily: 'ClashDisplay-Semibold',
       color: '#444',
     },
     cardStats: {
@@ -96,12 +96,30 @@ export const useCustomStyles = () => {
       color: '#909090',
     },
     cardTypeImg: {
-      width: 20,
-      height: 20,
-      borderRadius: 10,
+      width: 15,
+      height: 15,
+      borderRadius: 5,
     },
     picker: {
-      marginTop: -50,
+      width: '100%',
+      marginBottom: 5,
+      marginTop: -40,
+    },
+    itemStyle: {
+      fontSize: 18,
+      height: 100,
+      fontFamily: 'ClashDisplay-Medium',
+    },
+    loader: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    loadingText: {
+      fontFamily: 'ClashDisplay-Semibold',
+      marginTop: 10,
+      fontSize: 18,
+      color: '#333',
     },
   });
 
