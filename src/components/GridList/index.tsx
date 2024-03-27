@@ -37,8 +37,8 @@ const GridList = () => {
     <SafeAreaView>
       {isLoading ? (
         <View>
-          <ActivityIndicator />
-          <Text>Loading...</Text>
+          <ActivityIndicator style={styles.loader} />
+          <Text style={styles.loadingText}>Loading...</Text>
         </View>
       ) : (
         <ScrollView contentContainerStyle={styles.container}>
@@ -47,6 +47,7 @@ const GridList = () => {
               selectedValue={gen}
               onValueChange={(itemValue) => setGen(itemValue)}
               style={styles.picker}
+              itemStyle={styles.itemStyle}
             >
               {Array.from({ length: 9 }, (_, i) => i + 1).map((gen) => (
                 <Picker.Item
