@@ -32,10 +32,21 @@ const DrawerNavigator = () => {
       screenOptions={{
         headerShown: false,
         drawerPosition: 'right',
+        drawerStyle: {
+          backgroundColor: '#F2F7F9',
+        },
+        drawerItemStyle: {
+          marginVertical: 5,
+        },
+        drawerLabelStyle: {
+          color: '#1d1d1d',
+          fontSize: 18,
+          fontFamily: 'ClashGrotesk-Semibold',
+        },
       }}
     >
       <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="SignIn" component={SignIn} />
+      <Drawer.Screen name="Sign In" component={SignIn} />
       {/* Ajoutez ici d'autres écrans si nécessaire */}
     </Drawer.Navigator>
   );

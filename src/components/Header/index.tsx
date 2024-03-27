@@ -18,6 +18,7 @@ const MyIcon = () => {
 
   return (
     <TouchableOpacity
+      // @ts-ignore
       onPress={() => navigation.openDrawer()}
       style={{
         bottom: 13,
