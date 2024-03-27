@@ -55,6 +55,17 @@ export const useCustomStyles = () => {
       top: 70,
       left: 20,
     },
+    loader: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    loadingText: {
+      fontFamily: 'ClashDisplay-Semibold',
+      marginTop: 10,
+      fontSize: 18,
+      color: '#333',
+    },
   });
 
   return { fontsLoaded, styles };

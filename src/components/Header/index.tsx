@@ -1,19 +1,11 @@
 import React from 'react';
-import {
-  View,
-  Image,
-  TouchableOpacity,
-  Text,
-  ImageBackground,
-} from 'react-native';
+import { View, Image, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Logo } from '../../../assets/logos';
 import { useCustomStyles } from './style';
 import { pokeBackground } from '../../../assets/images';
 import Icon from 'react-native-vector-icons/Feather';
 
-const MyIcon = () => {
-  // Utilisez le bon type pour votre objet navigation
+const MyBigBurger = () => {
   const navigation = useNavigation();
 
   return (
@@ -38,7 +30,6 @@ const Header = () => {
     <View style={styles.container}>
       <Image source={pokeBackground} style={styles.imageBackground} />
       <View style={styles.navigationContainer}>
-        {/* <Text> arrow </Text> */}
         <TouchableOpacity
           onPress={() => navigation.navigate('Home' as never)}
           style={{
@@ -54,7 +45,7 @@ const Header = () => {
             dex
           </Text>
         </TouchableOpacity>
-        <MyIcon />
+        <MyBigBurger />
       </View>
     </View>
   );
