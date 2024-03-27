@@ -9,6 +9,7 @@ export const useCustomStyles = () => {
 
   const styles = StyleSheet.create({
     container: {
+      display: 'flex',
       position: 'relative',
       justifyContent: 'center',
       alignItems: 'center',
@@ -48,11 +49,22 @@ export const useCustomStyles = () => {
     },
     navigationContainer: {
       display: 'flex',
-      flexDirection: 'column',
+      flexDirection: 'row',
       position: 'absolute',
       alignItems: 'flex-start',
       top: 70,
       left: 20,
+    },
+    loader: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    loadingText: {
+      fontFamily: 'ClashDisplay-Semibold',
+      marginTop: 10,
+      fontSize: 18,
+      color: '#333',
     },
   });
 
