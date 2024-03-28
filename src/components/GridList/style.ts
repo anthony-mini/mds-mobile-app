@@ -133,8 +133,77 @@ export const useCustomStyles = () => {
       alignItems: 'center',
       backgroundColor: 'rgba(0,0,0,0.5)',
     },
+    modalTitle: {
+      fontSize: 26,
+      marginBottom: 5,
+      fontFamily: 'ClashDisplay-Semibold',
+      color: '#2d2d2d',
+    },
+    modalBody: {
+      flexDirection: 'row',
+      marginBottom: 20,
+      marginTop: 60,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
+    modalStats: {
+      flex: 2,
+    },
+    modalDivider: {
+      height: 1,
+      backgroundColor: '#000',
+      opacity: 0.5,
+      width: '100%',
+      marginBottom: 10,
+    },
+    modalFooter: {
+      flexDirection: 'row',
+      alignContent: 'center',
+      width: '100%',
+      gap: 10,
+      justifyContent: 'center',
+      marginBottom: 25,
+    },
+    modalType: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    modalTypeText: {
+      fontFamily: 'ClashDisplay-Medium',
+      fontSize: 16,
+      marginBottom: 10,
+    },
+    modalCloseButton: {
+      backgroundColor: '#2196F3',
+      borderRadius: 20,
+      width: 100,
+      padding: 10,
+      elevation: 2,
+    },
+    modalEncapsulateImg: {
+      width: 150,
+      height: 150,
+      borderRadius: 50,
+      overflow: 'hidden',
+      margin: 10,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
+    },
+    modalImage: {
+      width: '100%',
+      height: '100%',
+      resizeMode: 'cover',
+    },
     modalView: {
-      margin: 20,
+      margin: 30,
       backgroundColor: 'white',
       borderRadius: 20,
       padding: 35,
@@ -149,62 +218,25 @@ export const useCustomStyles = () => {
       elevation: 5,
       width: '90%',
     },
-    modalHeader: {
-      marginBottom: 20,
-    },
-    modalTitle: {
-      fontSize: 24,
-      fontWeight: 'bold',
-    },
     modalText: {
       textAlign: 'center',
-      marginBottom: 15,
+      fontSize: 16,
+      fontFamily: 'ClashDisplay-Semibold',
+      color: '#444',
     },
-    modalBody: {
-      flexDirection: 'row',
-      marginBottom: 20,
-    },
-    modalEncapsulateImg: {
-      flex: 1,
-    },
-    modalImage: {
-      width: 100,
-      height: 100,
-      marginBottom: 15,
-    },
-    modalStats: {
-      flex: 2,
-    },
-    modalDivider: {
-      height: 1,
-      backgroundColor: '#000',
+    modalHeader: {
+      position: 'absolute',
+      top: 15,
       width: '100%',
-      marginBottom: 20,
-    },
-    modalFooter: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      width: '100%',
-    },
-    modalType: {
-      flexDirection: 'row',
+      flexDirection: 'column',
       alignItems: 'center',
+      justifyContent: 'center',
     },
-    modalTypeText: {
-      marginLeft: 10,
-    },
-    modalCloseButton: {
-      backgroundColor: '#2196F3',
-      borderRadius: 20,
-      width: 100,
-      padding: 10,
-      elevation: 2,
-      marginTop: 15,
-    },
-    textStyle: {
+    modalTextButton: {
       color: 'white',
-      fontWeight: 'bold',
       textAlign: 'center',
+      fontSize: 16,
+      fontFamily: 'ClashDisplay-Semibold',
     },
   });
 

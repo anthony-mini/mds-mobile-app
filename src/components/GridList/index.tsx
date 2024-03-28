@@ -76,16 +76,24 @@ const GridList = () => {
                     />
                   </View>
                   <View style={styles.modalStats}>
-                    <Text>HP: {selectedPokemon?.stats?.hp}</Text>
-                    <Text>Attack: {selectedPokemon?.stats?.atk}</Text>
-                    <Text>Defense: {selectedPokemon?.stats?.def}</Text>
-                    <Text>
-                      Special Attack: {selectedPokemon?.stats?.spe_atk}
+                    <Text style={styles.modalTypeText}>
+                      Hp: {selectedPokemon?.stats?.hp}
                     </Text>
-                    <Text>
-                      Special Defense: {selectedPokemon?.stats?.spe_def}
+                    <Text style={styles.modalTypeText}>
+                      Atk: {selectedPokemon?.stats?.atk}
                     </Text>
-                    <Text>Speed: {selectedPokemon?.stats?.vit}</Text>
+                    <Text style={styles.modalTypeText}>
+                      Def: {selectedPokemon?.stats?.def}
+                    </Text>
+                    <Text style={styles.modalTypeText}>
+                      Spé. Atk: {selectedPokemon?.stats?.spe_atk}
+                    </Text>
+                    <Text style={styles.modalTypeText}>
+                      Spé. Def: {selectedPokemon?.stats?.spe_def}
+                    </Text>
+                    <Text style={styles.modalTypeText}>
+                      Vit: {selectedPokemon?.stats?.vit}
+                    </Text>
                   </View>
                 </View>
                 <View style={styles.modalDivider} />
@@ -94,20 +102,19 @@ const GridList = () => {
                     <View key={index} style={styles.modalType}>
                       <Image
                         source={{ uri: type.image }}
-                        style={{ width: 20, height: 20 }}
+                        style={{ width: 25, height: 25, borderRadius: 20 }}
                       />
-                      <Text style={styles.modalTypeText}>{type.name}</Text>
                     </View>
                   ))}
-                  <TouchableOpacity
-                    style={styles.modalCloseButton}
-                    onPress={() => {
-                      setModalVisible(!modalVisible);
-                    }}
-                  >
-                    <Text style={styles.textStyle}>Fermer</Text>
-                  </TouchableOpacity>
                 </View>
+                <TouchableOpacity
+                  style={styles.modalCloseButton}
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                  }}
+                >
+                  <Text style={styles.modalTextButton}>Fermer</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </Modal>
