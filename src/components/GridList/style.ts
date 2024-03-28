@@ -8,6 +8,19 @@ export const useCustomStyles = () => {
   });
 
   const styles = StyleSheet.create({
+    blocTitle: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: 20,
+      zIndex: -200,
+    },
+    teamTitle: {
+      marginBottom: 10,
+      fontSize: 24,
+      fontFamily: 'ClashDisplay-Semibold',
+      color: '#2d2d2d',
+    },
     container: {
       padding: 24,
     },
