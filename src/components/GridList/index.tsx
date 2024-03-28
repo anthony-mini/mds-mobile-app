@@ -15,6 +15,7 @@ import { Data } from '../../interfaces/pokemonInterfaces';
 import { SafeAreaView } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { Picker } from '@react-native-picker/picker';
+import { BlurView } from 'expo-blur';
 
 const GridList = () => {
   const { fontsLoaded, styles } = useCustomStyles();
@@ -57,66 +58,68 @@ const GridList = () => {
             }}
             style={styles.modalContainer}
           >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <View style={styles.modalHeader}>
-                  <Text style={styles.modalTitle}>
-                    {selectedPokemon?.name?.fr}
-                  </Text>
-                  <Text style={styles.modalText}>
-                    Pokedex ID: {selectedPokemon?.pokedex_id}
-                  </Text>
-                </View>
-                <View style={styles.modalBody}>
-                  <View style={styles.modalEncapsulateImg}>
-                    <Image
-                      source={{ uri: selectedPokemon?.sprites?.regular }}
-                      style={styles.modalImage}
-                      resizeMode="cover"
-                    />
-                  </View>
-                  <View style={styles.modalStats}>
-                    <Text style={styles.modalTypeText}>
-                      Hp: {selectedPokemon?.stats?.hp}
+            <BlurView intensity={60} tint="light" style={styles.absolute}>
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <View style={styles.modalHeader}>
+                    <Text style={styles.modalTitle}>
+                      {selectedPokemon?.name?.fr}
                     </Text>
-                    <Text style={styles.modalTypeText}>
-                      Atk: {selectedPokemon?.stats?.atk}
-                    </Text>
-                    <Text style={styles.modalTypeText}>
-                      Def: {selectedPokemon?.stats?.def}
-                    </Text>
-                    <Text style={styles.modalTypeText}>
-                      Spé. Atk: {selectedPokemon?.stats?.spe_atk}
-                    </Text>
-                    <Text style={styles.modalTypeText}>
-                      Spé. Def: {selectedPokemon?.stats?.spe_def}
-                    </Text>
-                    <Text style={styles.modalTypeText}>
-                      Vit: {selectedPokemon?.stats?.vit}
+                    <Text style={styles.modalText}>
+                      Pokedex ID: {selectedPokemon?.pokedex_id}
                     </Text>
                   </View>
-                </View>
-                <View style={styles.modalDivider} />
-                <View style={styles.modalFooter}>
-                  {selectedPokemon?.types?.map((type, index) => (
-                    <View key={index} style={styles.modalType}>
+                  <View style={styles.modalBody}>
+                    <View style={styles.modalEncapsulateImg}>
                       <Image
-                        source={{ uri: type.image }}
-                        style={{ width: 25, height: 25, borderRadius: 20 }}
+                        source={{ uri: selectedPokemon?.sprites?.regular }}
+                        style={styles.modalImage}
+                        resizeMode="cover"
                       />
                     </View>
-                  ))}
+                    <View style={styles.modalStats}>
+                      <Text style={styles.modalTypeText}>
+                        Hp: {selectedPokemon?.stats?.hp}
+                      </Text>
+                      <Text style={styles.modalTypeText}>
+                        Atk: {selectedPokemon?.stats?.atk}
+                      </Text>
+                      <Text style={styles.modalTypeText}>
+                        Def: {selectedPokemon?.stats?.def}
+                      </Text>
+                      <Text style={styles.modalTypeText}>
+                        Spé. Atk: {selectedPokemon?.stats?.spe_atk}
+                      </Text>
+                      <Text style={styles.modalTypeText}>
+                        Spé. Def: {selectedPokemon?.stats?.spe_def}
+                      </Text>
+                      <Text style={styles.modalTypeText}>
+                        Vit: {selectedPokemon?.stats?.vit}
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.modalDivider} />
+                  <View style={styles.modalFooter}>
+                    {selectedPokemon?.types?.map((type, index) => (
+                      <View key={index} style={styles.modalType}>
+                        <Image
+                          source={{ uri: type.image }}
+                          style={{ width: 25, height: 25, borderRadius: 20 }}
+                        />
+                      </View>
+                    ))}
+                  </View>
+                  <TouchableOpacity
+                    style={styles.modalCloseButton}
+                    onPress={() => {
+                      setModalVisible(!modalVisible);
+                    }}
+                  >
+                    <Text style={styles.modalTextButton}>Fermer</Text>
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                  style={styles.modalCloseButton}
-                  onPress={() => {
-                    setModalVisible(!modalVisible);
-                  }}
-                >
-                  <Text style={styles.modalTextButton}>Fermer</Text>
-                </TouchableOpacity>
               </View>
-            </View>
+            </BlurView>
           </Modal>
 
           <View>
