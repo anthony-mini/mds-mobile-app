@@ -4,10 +4,9 @@ import {
   Image,
   TouchableOpacity,
   Text,
-  ImageBackground,
-  FlatList,
   ActivityIndicator,
   ScrollView,
+  Modal,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useCustomStyles } from './style';
@@ -24,6 +23,8 @@ const GridList = () => {
   const [data, setData] = React.useState<Data[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [gen, setGen] = React.useState('1');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedPokemon, setSelectedPokemon] = useState<Data | null>(null);
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -32,6 +33,11 @@ const GridList = () => {
       setIsLoading(false);
     });
   }, [gen]);
+
+  const handlePress = (pokemon: Data) => {
+    setSelectedPokemon(pokemon);
+    setModalVisible(true);
+  };
 
   return (
     <SafeAreaView>
@@ -42,6 +48,77 @@ const GridList = () => {
         </View>
       ) : (
         <ScrollView contentContainerStyle={styles.container}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              setModalVisible(!modalVisible);
+            }}
+            style={styles.modalContainer}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <View style={styles.modalHeader}>
+                  <Text style={styles.modalTitle}>
+                    {selectedPokemon?.name?.fr}
+                  </Text>
+                  <Text style={styles.modalText}>
+                    Pokedex ID: {selectedPokemon?.pokedex_id}
+                  </Text>
+                </View>
+                <View style={styles.modalBody}>
+                  <View style={styles.modalEncapsulateImg}>
+                    <Image
+                      source={{ uri: selectedPokemon?.sprites?.regular }}
+                      style={styles.modalImage}
+                      resizeMode="cover"
+                    />
+                  </View>
+                  <View style={styles.modalStats}>
+                    <Text style={styles.modalTypeText}>
+                      Hp: {selectedPokemon?.stats?.hp}
+                    </Text>
+                    <Text style={styles.modalTypeText}>
+                      Atk: {selectedPokemon?.stats?.atk}
+                    </Text>
+                    <Text style={styles.modalTypeText}>
+                      Def: {selectedPokemon?.stats?.def}
+                    </Text>
+                    <Text style={styles.modalTypeText}>
+                      Spé. Atk: {selectedPokemon?.stats?.spe_atk}
+                    </Text>
+                    <Text style={styles.modalTypeText}>
+                      Spé. Def: {selectedPokemon?.stats?.spe_def}
+                    </Text>
+                    <Text style={styles.modalTypeText}>
+                      Vit: {selectedPokemon?.stats?.vit}
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.modalDivider} />
+                <View style={styles.modalFooter}>
+                  {selectedPokemon?.types?.map((type, index) => (
+                    <View key={index} style={styles.modalType}>
+                      <Image
+                        source={{ uri: type.image }}
+                        style={{ width: 25, height: 25, borderRadius: 20 }}
+                      />
+                    </View>
+                  ))}
+                </View>
+                <TouchableOpacity
+                  style={styles.modalCloseButton}
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                  }}
+                >
+                  <Text style={styles.modalTextButton}>Fermer</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+
           <View>
             <Picker
               selectedValue={gen}
@@ -79,7 +156,7 @@ const GridList = () => {
                   <TouchableOpacity
                     key={index}
                     onPress={() => {
-                      // handle onPress
+                      handlePress(data[index]);
                     }}
                   >
                     <View style={styles.card}>
