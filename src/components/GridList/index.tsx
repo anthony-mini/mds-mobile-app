@@ -261,7 +261,7 @@ const GridList = () => {
               ))}
             </Picker>
           </View>
-          {/* <Button
+          <Button
             title="Check Storage"
             onPress={async () => {
               const pokemon = await AsyncStorage.getItem('capturedPokemon');
@@ -278,7 +278,7 @@ const GridList = () => {
               await AsyncStorage.clear();
               console.log('Storage cleared');
             }}
-          /> */}
+          />
           {isLoading ? (
             <ActivityIndicator />
           ) : (
