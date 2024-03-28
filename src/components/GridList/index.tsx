@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   ScrollView,
   Modal,
+  Button,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useCustomStyles } from './style';
@@ -16,6 +17,8 @@ import { SafeAreaView } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { Picker } from '@react-native-picker/picker';
 import { BlurView } from 'expo-blur';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Accelerometer } from 'expo-sensors';
 
 const GridList = () => {
   const { fontsLoaded, styles } = useCustomStyles();
@@ -26,6 +29,37 @@ const GridList = () => {
   const [gen, setGen] = React.useState('1');
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState<Data | null>(null);
+
+  // Ajout du selectedPokemon dans l'AsyncStorage au shake de l'appareil 'expo-sensors';
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', async () => {
+      const pokemon = await AsyncStorage.getItem('selectedPokemon');
+      if (pokemon) {
+        console.log('Retrieved captured pokemon:', JSON.parse(pokemon));
+        setSelectedPokemon(JSON.parse(pokemon));
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  React.useEffect(() => {
+    Accelerometer.setUpdateInterval(1000);
+    const subscription = Accelerometer.addListener((accelerometerData) => {
+      if (accelerometerData.x > 1) {
+        console.log('Shake detected, capturing pokemon:', selectedPokemon);
+        AsyncStorage.setItem(
+          'selectedPokemon',
+          JSON.stringify(selectedPokemon),
+        );
+      }
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, [selectedPokemon]);
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -138,6 +172,17 @@ const GridList = () => {
               ))}
             </Picker>
           </View>
+          <Button
+            title="Check Storage"
+            onPress={async () => {
+              const pokemon = await AsyncStorage.getItem('selectedPokemon');
+              if (pokemon) {
+                console.log('Retrieved captured pokemon:', JSON.parse(pokemon));
+              } else {
+                console.log('No captured pokemon in storage');
+              }
+            }}
+          />
           {isLoading ? (
             <ActivityIndicator />
           ) : (
