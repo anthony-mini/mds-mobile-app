@@ -4,8 +4,6 @@ import {
   Image,
   TouchableOpacity,
   Text,
-  ImageBackground,
-  FlatList,
   ActivityIndicator,
   ScrollView,
   Modal,
@@ -57,37 +55,59 @@ const GridList = () => {
             onRequestClose={() => {
               setModalVisible(!modalVisible);
             }}
+            style={styles.modalContainer}
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Image
-                  source={{ uri: selectedPokemon?.sprites?.regular }}
-                  style={styles.modalImage}
-                />
-                <Text style={styles.modalText}>
-                  {selectedPokemon?.name?.fr} - {selectedPokemon?.pokedex_id}
-                </Text>
-                <Text style={styles.modalText}>
-                  Generation: {selectedPokemon?.generation}
-                </Text>
-                <Text style={styles.modalText}>
-                  Height: {selectedPokemon?.height}
-                </Text>
-                <Text style={styles.modalText}>
-                  Weight: {selectedPokemon?.weight}
-                </Text>
-                <Text style={styles.modalText}>
-                  Types:{' '}
-                  {selectedPokemon?.types?.map((type) => type.name).join(', ')}
-                </Text>
-                <TouchableOpacity
-                  style={styles.modalCloseButton}
-                  onPress={() => {
-                    setModalVisible(!modalVisible);
-                  }}
-                >
-                  <Text style={styles.textStyle}>Close</Text>
-                </TouchableOpacity>
+                <View style={styles.modalHeader}>
+                  <Text style={styles.modalTitle}>
+                    {selectedPokemon?.name?.fr}
+                  </Text>
+                  <Text style={styles.modalText}>
+                    Pokedex ID: {selectedPokemon?.pokedex_id}
+                  </Text>
+                </View>
+                <View style={styles.modalBody}>
+                  <View style={styles.modalEncapsulateImg}>
+                    <Image
+                      source={{ uri: selectedPokemon?.sprites?.regular }}
+                      style={styles.modalImage}
+                      resizeMode="cover"
+                    />
+                  </View>
+                  <View style={styles.modalStats}>
+                    <Text>HP: {selectedPokemon?.stats?.hp}</Text>
+                    <Text>Attack: {selectedPokemon?.stats?.atk}</Text>
+                    <Text>Defense: {selectedPokemon?.stats?.def}</Text>
+                    <Text>
+                      Special Attack: {selectedPokemon?.stats?.spe_atk}
+                    </Text>
+                    <Text>
+                      Special Defense: {selectedPokemon?.stats?.spe_def}
+                    </Text>
+                    <Text>Speed: {selectedPokemon?.stats?.vit}</Text>
+                  </View>
+                </View>
+                <View style={styles.modalDivider} />
+                <View style={styles.modalFooter}>
+                  {selectedPokemon?.types?.map((type, index) => (
+                    <View key={index} style={styles.modalType}>
+                      <Image
+                        source={{ uri: type.image }}
+                        style={{ width: 20, height: 20 }}
+                      />
+                      <Text style={styles.modalTypeText}>{type.name}</Text>
+                    </View>
+                  ))}
+                  <TouchableOpacity
+                    style={styles.modalCloseButton}
+                    onPress={() => {
+                      setModalVisible(!modalVisible);
+                    }}
+                  >
+                    <Text style={styles.textStyle}>Fermer</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           </Modal>

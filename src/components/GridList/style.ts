@@ -127,6 +127,12 @@ export const useCustomStyles = () => {
       alignItems: 'center',
       marginTop: 22,
     },
+    modalContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0,0,0,0.5)',
+    },
     modalView: {
       margin: 20,
       backgroundColor: 'white',
@@ -141,20 +147,56 @@ export const useCustomStyles = () => {
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,
-      width: '90%', // Ajustez la largeur selon votre design
+      width: '90%',
     },
-    modalImage: {
-      width: 100, // Ajustez selon la taille souhaitée
-      height: 100, // Ajustez selon la taille souhaitée
-      marginBottom: 15,
+    modalHeader: {
+      marginBottom: 20,
+    },
+    modalTitle: {
+      fontSize: 24,
+      fontWeight: 'bold',
     },
     modalText: {
       textAlign: 'center',
       marginBottom: 15,
     },
+    modalBody: {
+      flexDirection: 'row',
+      marginBottom: 20,
+    },
+    modalEncapsulateImg: {
+      flex: 1,
+    },
+    modalImage: {
+      width: 100,
+      height: 100,
+      marginBottom: 15,
+    },
+    modalStats: {
+      flex: 2,
+    },
+    modalDivider: {
+      height: 1,
+      backgroundColor: '#000',
+      width: '100%',
+      marginBottom: 20,
+    },
+    modalFooter: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '100%',
+    },
+    modalType: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    modalTypeText: {
+      marginLeft: 10,
+    },
     modalCloseButton: {
-      backgroundColor: '#2196F3', // Ou toute autre couleur qui s'accorde avec votre thème
+      backgroundColor: '#2196F3',
       borderRadius: 20,
+      width: 100,
       padding: 10,
       elevation: 2,
       marginTop: 15,
