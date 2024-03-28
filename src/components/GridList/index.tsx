@@ -46,15 +46,22 @@ const GridList = () => {
 
   React.useEffect(() => {
     Accelerometer.setUpdateInterval(1000);
-    const subscription = Accelerometer.addListener((accelerometerData) => {
-      if (accelerometerData.x > 1) {
-        console.log('Shake detected, capturing pokemon:', selectedPokemon);
-        AsyncStorage.setItem(
-          'selectedPokemon',
-          JSON.stringify(selectedPokemon),
-        );
-      }
-    });
+    const subscription = Accelerometer.addListener(
+      async (accelerometerData) => {
+        if (accelerometerData.x > 1) {
+          console.log('Shake detected, capturing pokemon:', selectedPokemon);
+          const currentPokemon = await AsyncStorage.getItem('capturedPokemon');
+          const capturedPokemon = currentPokemon
+            ? JSON.parse(currentPokemon)
+            : [];
+          capturedPokemon.push(selectedPokemon);
+          AsyncStorage.setItem(
+            'capturedPokemon',
+            JSON.stringify(capturedPokemon),
+          );
+        }
+      },
+    );
 
     return () => {
       subscription.remove();
@@ -175,7 +182,7 @@ const GridList = () => {
           <Button
             title="Check Storage"
             onPress={async () => {
-              const pokemon = await AsyncStorage.getItem('selectedPokemon');
+              const pokemon = await AsyncStorage.getItem('capturedPokemon');
               if (pokemon) {
                 console.log('Retrieved captured pokemon:', JSON.parse(pokemon));
               } else {
