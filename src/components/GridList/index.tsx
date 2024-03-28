@@ -8,6 +8,7 @@ import {
   ScrollView,
   Modal,
   Button,
+  Vibration,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useCustomStyles } from './style';
@@ -31,7 +32,6 @@ const GridList = () => {
   const [selectedPokemon, setSelectedPokemon] = useState<Data | null>(null);
 
   // Ajout du selectedPokemon dans l'AsyncStorage au shake de l'appareil 'expo-sensors';
-
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('focus', async () => {
       const pokemon = await AsyncStorage.getItem('selectedPokemon');
@@ -45,7 +45,7 @@ const GridList = () => {
   }, [navigation]);
 
   React.useEffect(() => {
-    Accelerometer.setUpdateInterval(1000);
+    Accelerometer.setUpdateInterval(500);
     const subscription = Accelerometer.addListener(
       async (accelerometerData) => {
         if (accelerometerData.x > 1) {
@@ -59,6 +59,8 @@ const GridList = () => {
             'capturedPokemon',
             JSON.stringify(capturedPokemon),
           );
+
+          Vibration.vibrate();
         }
       },
     );
@@ -188,6 +190,13 @@ const GridList = () => {
               } else {
                 console.log('No captured pokemon in storage');
               }
+            }}
+          />
+          <Button
+            title="Clear Storage"
+            onPress={async () => {
+              await AsyncStorage.clear();
+              console.log('Storage cleared');
             }}
           />
           {isLoading ? (
