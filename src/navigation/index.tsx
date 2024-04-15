@@ -5,18 +5,12 @@ import {
   DefaultTheme,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import { Loading, SignIn, Home } from '../screen/index';
-
-export default function Navigation() {
-  return (
-    <NavigationContainer>
-      <RootNavigator />
-    </NavigationContainer>
-  );
-}
+import { Loading, SignIn, Home, TeamScreen } from '../screen/index';
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const RootNavigator = () => {
   return (
@@ -30,3 +24,39 @@ const RootNavigator = () => {
     </Stack.Navigator>
   );
 };
+
+const DrawerNavigator = () => {
+  return (
+    <Drawer.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+        drawerPosition: 'right',
+        drawerStyle: {
+          backgroundColor: '#F2F7F9',
+        },
+        drawerItemStyle: {
+          marginVertical: 5,
+        },
+        drawerLabelStyle: {
+          color: '#1d1d1d',
+          fontSize: 18,
+          fontFamily: 'ClashGrotesk-Semibold',
+        },
+      }}
+    >
+      <Drawer.Screen name="Accueil" component={Home} />
+      <Drawer.Screen name="Mon Équipe" component={TeamScreen} />
+      <Drawer.Screen name="Connection" component={SignIn} />
+      {/* Ajoutez ici d'autres écrans si nécessaire */}
+    </Drawer.Navigator>
+  );
+};
+
+export default function Navigation() {
+  return (
+    <NavigationContainer>
+      <DrawerNavigator />
+    </NavigationContainer>
+  );
+}

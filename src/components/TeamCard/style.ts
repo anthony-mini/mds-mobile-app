@@ -16,7 +16,6 @@ export const useCustomStyles = () => {
       zIndex: -200,
     },
     teamTitle: {
-      marginBottom: 10,
       fontSize: 24,
       fontFamily: 'ClashDisplay-Semibold',
       color: '#2d2d2d',
