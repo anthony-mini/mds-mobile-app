@@ -25,7 +25,6 @@ const TeamCard = () => {
   const [isLoading, setIsLoading] = React.useState(false);
 
   // Get Data of AsyncStorage
-
   useFocusEffect(
     React.useCallback(() => {
       setIsLoading(true);
@@ -80,7 +79,7 @@ const TeamCard = () => {
               ) => {
                 return (
                   <>
-                    <TouchableOpacity key={index}>
+                    <TouchableOpacity key={pokedex_id}>
                       <View style={styles.card}>
                         <View style={styles.cardTop}>
                           <Image
