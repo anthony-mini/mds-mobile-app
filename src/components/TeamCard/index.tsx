@@ -18,6 +18,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native';
 import { BlurView } from 'expo-blur';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import { Swipeable } from 'react-native-gesture-handler';
 
 const TeamCard = () => {
   const { fontsLoaded, styles } = useCustomStyles();
@@ -47,6 +48,28 @@ const TeamCard = () => {
       return () => {};
     }, []),
   );
+
+  const deleteItem = (pokedex_id: number) => {
+    const deletePokemon = async () => {
+      const currentPokemon = await AsyncStorage.getItem('capturedPokemon');
+      if (currentPokemon) {
+        const newPokemon = JSON.parse(currentPokemon).filter(
+          (pokemon: Data) => pokemon.pokedex_id !== pokedex_id,
+        );
+        if (newPokemon.length > 0) {
+          await AsyncStorage.setItem(
+            'capturedPokemon',
+            JSON.stringify(newPokemon),
+          );
+        } else {
+          await AsyncStorage.removeItem('capturedPokemon');
+        }
+        setData(newPokemon);
+      }
+    };
+
+    deletePokemon();
+  };
 
   return (
     <SafeAreaView>
@@ -79,7 +102,19 @@ const TeamCard = () => {
               ) => {
                 return (
                   <>
-                    <TouchableOpacity key={pokedex_id}>
+                    <Swipeable
+                      key={pokedex_id}
+                      renderRightActions={() => (
+                        <TouchableOpacity
+                          onPress={() => deleteItem(pokedex_id)}
+                          style={styles.blocDeleteButton}
+                        >
+                          <View style={styles.blocDeleteButton}>
+                            <Text style={styles.textDeleteButton}>Delete</Text>
+                          </View>
+                        </TouchableOpacity>
+                      )}
+                    >
                       <View style={styles.card}>
                         <View style={styles.cardTop}>
                           <Image
@@ -146,7 +181,7 @@ const TeamCard = () => {
                           </View>
                         </View>
                       </View>
-                    </TouchableOpacity>
+                    </Swipeable>
                   </>
                 );
               },
