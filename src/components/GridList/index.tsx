@@ -118,6 +118,9 @@ const GridList = () => {
         </View>
       ) : (
         <ScrollView contentContainerStyle={styles.container}>
+          <View style={styles.blocTitle}>
+            <Text style={styles.teamTitle}> Accueil </Text>
+          </View>
           <Modal
             animationType="slide"
             transparent={true}

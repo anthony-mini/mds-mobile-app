@@ -7,7 +7,7 @@ import {
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import { Loading, SignIn, Home } from '../screen/index';
+import { Loading, SignIn, Home, TeamScreen } from '../screen/index';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -45,8 +45,9 @@ const DrawerNavigator = () => {
         },
       }}
     >
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Sign In" component={SignIn} />
+      <Drawer.Screen name="Accueil" component={Home} />
+      <Drawer.Screen name="Mon Équipe" component={TeamScreen} />
+      <Drawer.Screen name="Connection" component={SignIn} />
       {/* Ajoutez ici d'autres écrans si nécessaire */}
     </Drawer.Navigator>
   );
