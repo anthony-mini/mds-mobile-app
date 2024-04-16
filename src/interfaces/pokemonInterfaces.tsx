@@ -71,6 +71,10 @@ export interface Data {
   catch_rate?: number;
   level_100?: number;
   forme?: string | null;
+  location?: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 export interface Option {

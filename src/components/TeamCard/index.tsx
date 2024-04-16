@@ -24,6 +24,17 @@ const TeamCard = () => {
   const { fontsLoaded, styles } = useCustomStyles();
   const [data, setData] = React.useState<Data[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const capturedPokemons = data;
+
+  const uniquePokemons = capturedPokemons.filter(
+    (pokemon, index, self) =>
+      index ===
+      self.findIndex(
+        (p) =>
+          p.location?.latitude === pokemon.location?.latitude &&
+          p.location?.longitude === pokemon.location?.longitude,
+      ),
+  );
 
   // Get Data of AsyncStorage
   useFocusEffect(
@@ -110,7 +121,7 @@ const TeamCard = () => {
                           style={styles.blocDeleteButton}
                         >
                           <View style={styles.blocDeleteButton}>
-                            <Text style={styles.textDeleteButton}>Delete</Text>
+                            <Text style={styles.textDeleteButton}>Retirer</Text>
                           </View>
                         </TouchableOpacity>
                       )}
@@ -170,15 +181,16 @@ const TeamCard = () => {
                             </View>
                           </View>
 
-                          <View style={styles.cardFooter}>
-                            <Text style={styles.cardFooterText}>
-                              Height: {height}
-                            </Text>
-
-                            <Text style={styles.cardFooterText}>
-                              Weight: {weight}
-                            </Text>
-                          </View>
+                          {uniquePokemons.map((pokemon, index) => (
+                            <View key={index}>
+                              <Text style={styles.cardFooterText}>
+                                Latitude: {pokemon.location?.latitude}
+                              </Text>
+                              <Text style={styles.cardFooterText}>
+                                Longitude: {pokemon.location?.longitude}
+                              </Text>
+                            </View>
+                          ))}
                         </View>
                       </View>
                     </Swipeable>
