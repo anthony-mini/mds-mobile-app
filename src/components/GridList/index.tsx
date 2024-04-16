@@ -21,6 +21,7 @@ import { Picker } from '@react-native-picker/picker';
 import { BlurView } from 'expo-blur';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Accelerometer } from 'expo-sensors';
+import * as Location from 'expo-location';
 
 const GridList = () => {
   const { fontsLoaded, styles } = useCustomStyles();
@@ -52,12 +53,33 @@ const GridList = () => {
     Accelerometer.setUpdateInterval(500);
     const subscription = Accelerometer.addListener(
       async (accelerometerData) => {
-        if (accelerometerData.x > 1) {
+        // ...
+
+        if (accelerometerData.x > 1 && selectedPokemon) {
           console.log('Shake detected, capturing pokemon:', selectedPokemon);
           const currentPokemon = await AsyncStorage.getItem('capturedPokemon');
           const capturedPokemon = currentPokemon
             ? JSON.parse(currentPokemon)
             : [];
+
+          // Get current location
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          console.log('Status:', status);
+
+          if (status !== 'granted') {
+            console.error('Permission to access location was denied');
+            return;
+          }
+
+          let location = await Location.getCurrentPositionAsync({});
+          // Add location data to the Pokemon object
+          selectedPokemon.location = {
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+          };
+
+          console.log('Location:', selectedPokemon.location);
+
           capturedPokemon.push(selectedPokemon);
           AsyncStorage.setItem(
             'capturedPokemon',
@@ -71,10 +93,6 @@ const GridList = () => {
         }
       },
     );
-
-    return () => {
-      subscription.remove();
-    };
   }, [selectedPokemon]);
 
   React.useEffect(() => {
@@ -229,13 +247,31 @@ const GridList = () => {
                     const capturedPokemon = currentPokemon
                       ? JSON.parse(currentPokemon)
                       : [];
-                    capturedPokemon.push(selectedPokemon);
-                    AsyncStorage.setItem(
-                      'capturedPokemon',
-                      JSON.stringify(capturedPokemon),
-                    );
-                    Vibration.vibrate();
-                    setRecentlyCaptured(true);
+
+                    // Get current location
+                    let { status } =
+                      await Location.requestForegroundPermissionsAsync();
+                    if (status !== 'granted') {
+                      console.error('Permission to access location was denied');
+                      return;
+                    }
+
+                    let location = await Location.getCurrentPositionAsync({});
+                    // Add location data to the Pokemon object
+                    if (selectedPokemon) {
+                      selectedPokemon.location = {
+                        latitude: location.coords.latitude,
+                        longitude: location.coords.longitude,
+                      };
+
+                      capturedPokemon.push(selectedPokemon);
+                      AsyncStorage.setItem(
+                        'capturedPokemon',
+                        JSON.stringify(capturedPokemon),
+                      );
+                      Vibration.vibrate();
+                      setRecentlyCaptured(true);
+                    }
                   }}
                 >
                   {!recentlyCaptured && (
